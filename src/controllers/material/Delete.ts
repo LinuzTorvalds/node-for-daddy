@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import DeleteMaterialService from '../../services/material/Delete'
 
-export default class CreateMaterialControl {
+export default class DeleteMaterialControl {
   async handle(request: Request, response: Response) {
     const { Lote } = request.params
 

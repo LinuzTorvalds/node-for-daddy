@@ -19,7 +19,7 @@ model users {
 
 model material {
   lote     String @id
-  Description String
+  description String
   amount   Int 
   shelf_life DateTime @db.Date
 }

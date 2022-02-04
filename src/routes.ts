@@ -1,10 +1,40 @@
 import { Request, Response, Router } from 'express'
 
+//users
+import SignUpUserControl from './controllers/users/SignUp'
+import SignInUserControl from './controllers/users/SignIn'
+import UpdateUserControl from './controllers/users/Update'
+
+//materials
+import CreateMaterialControl from './controllers/material/Create'
+import DeleteMaterialControl from './controllers/material/Delete'
+import UpdateMaterialControl from './controllers/material/Update'
+
+//users
+const signUpUserControl = new SignUpUserControl()
+const signInUserControl = new SignInUserControl()
+const updateUserControl = new UpdateUserControl()
+
+//materials
+const createMaterialControl = new CreateMaterialControl()
+const deleteMaterialControl = new DeleteMaterialControl()
+const updateMaterialControl = new UpdateMaterialControl()
+
 const router = Router()
 
-//test
+//home
 router.get('/', (request: Request, response: Response) => {
   response.send('Ready :) ^-^')
 })
+
+//users
+router.post('/users/signup', signUpUserControl.handle)
+router.post('/users/signin', signInUserControl.handle)
+router.put('/users/update/:Code', updateUserControl.handle)
+
+//materials
+router.post('/materials/create', createMaterialControl.handle)
+router.delete('/materials/delete/:Lote', deleteMaterialControl.handle)
+router.put('/materials/update/:Lote', updateMaterialControl.handle)
 
 export default router

@@ -7,8 +7,8 @@ export default class DeleteMaterialControl {
 
     const deleteMaterialService = new DeleteMaterialService()
 
-    const material = await deleteMaterialService.execute(Lote).finally()
+    await deleteMaterialService.execute(Lote).finally()
 
-    return response.send(material)
+    return response.status(201).send('successfully delete :D')
   }
 }

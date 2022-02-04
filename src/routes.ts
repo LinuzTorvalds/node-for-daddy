@@ -9,6 +9,7 @@ import UpdateUserControl from './controllers/users/Update'
 import CreateMaterialControl from './controllers/material/Create'
 import DeleteMaterialControl from './controllers/material/Delete'
 import UpdateMaterialControl from './controllers/material/Update'
+import ListMaterialControl from './controllers/material/List'
 
 //users
 const signUpUserControl = new SignUpUserControl()
@@ -19,6 +20,7 @@ const updateUserControl = new UpdateUserControl()
 const createMaterialControl = new CreateMaterialControl()
 const deleteMaterialControl = new DeleteMaterialControl()
 const updateMaterialControl = new UpdateMaterialControl()
+const listMaterialControl = new ListMaterialControl()
 
 const router = Router()
 
@@ -36,5 +38,6 @@ router.put('/users/update/:Code', updateUserControl.handle)
 router.post('/materials/create', createMaterialControl.handle)
 router.delete('/materials/delete/:Lote', deleteMaterialControl.handle)
 router.put('/materials/update/:Lote', updateMaterialControl.handle)
+router.get('/materials/list', listMaterialControl.handle)
 
 export default router

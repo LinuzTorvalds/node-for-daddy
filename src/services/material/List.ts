@@ -1,7 +1,7 @@
 import { material, PrismaClient } from '@prisma/client'
 import moment from 'moment'
 
-export default class CreateMaterialService {
+export default class ListMaterialService {
   async execute() {
     const prisma = new PrismaClient()
 

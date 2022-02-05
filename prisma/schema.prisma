@@ -23,3 +23,10 @@ model material {
   amount   Int 
   shelf_life DateTime @db.Date
 }
+
+model reports {
+  code     String   @id
+  lote     String
+  description     String
+  amount   Int  
+}

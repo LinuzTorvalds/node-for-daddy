@@ -29,4 +29,5 @@ model reports {
   lote     String
   description     String
   amount   Int  
+  day DateTime @db.Date
 }

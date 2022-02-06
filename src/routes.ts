@@ -15,6 +15,8 @@ import ReadMaterialControl from './controllers/material/Read'
 //reports
 import CreateReportControl from './controllers/report/Create'
 import UpdateReportControl from './controllers/report/Update'
+import ReportMaterialControl from './controllers/report/ReportMaterial'
+import ReportTimeControl from './controllers/report/ReportTime'
 
 //users
 const signUpUserControl = new SignUpUserControl()
@@ -31,6 +33,8 @@ const readMaterialControl = new ReadMaterialControl()
 //reports
 const createReportControl = new CreateReportControl()
 const updateReportControl = new UpdateReportControl()
+const reportMaterialControl = new ReportMaterialControl()
+const reportTimeControl = new ReportTimeControl()
 
 const router = Router()
 
@@ -54,5 +58,7 @@ router.get('/materials/read/:Lote', readMaterialControl.handle)
 //reports
 router.post('/reports/create', createReportControl.handle)
 router.put('/reports/update/:Code', updateReportControl.handle)
+router.get('/reports/material', reportMaterialControl.handle)
+router.get('/reports/time', reportTimeControl.handle)
 
 export default router

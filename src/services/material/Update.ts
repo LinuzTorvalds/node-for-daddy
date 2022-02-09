@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import moment from 'moment'
 
 type materialRequest = {
   Description: string
@@ -28,6 +29,15 @@ export default class UpdateMaterialService {
 
     prisma.$disconnect()
 
-    return material
+    const materialFind = {
+      lote: material.lote,
+      description: material.description,
+      amount: material.amount,
+      shelf_life: moment(material.shelf_life)
+        .add(1, 'days')
+        .format('YYYY-MM-DD'),
+    }
+
+    return materialFind
   }
 }

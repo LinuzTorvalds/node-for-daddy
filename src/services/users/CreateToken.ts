@@ -15,8 +15,12 @@ export default class CreateTokenService {
       where: { email: Email },
     })
 
+    const UserToken = {
+      Token: user.token,
+    }
+
     prisma.$disconnect()
 
-    return user.token
+    return UserToken
   }
 }

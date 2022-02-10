@@ -3,11 +3,13 @@ import { PrismaClient } from '@prisma/client'
 type userRequest = {
   Token: string
 }
-export default class KeepConectService {
+export default class KeepConnectService {
   async execute({ Token }: userRequest) {
     const prisma = new PrismaClient()
 
-    const user = await prisma.users.findFirst({ where: { token: Token } })
+    const user = await prisma.users
+      .findFirst({ where: { token: Token } })
+      .finally(() => prisma.$disconnect())
 
     const userFind = {
       name: user.name,

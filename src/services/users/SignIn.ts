@@ -10,7 +10,9 @@ export default class SignInUserService {
   async execute({ Email, Password }: userRequest) {
     const prisma = new PrismaClient()
 
-    const user = await prisma.users.findFirst({ where: { email: Email } })
+    const user = await prisma.users
+      .findFirst({ where: { email: Email } })
+      .finally(() => prisma.$disconnect())
 
     if (!user) throw new Error('Login/Password incorrect')
 

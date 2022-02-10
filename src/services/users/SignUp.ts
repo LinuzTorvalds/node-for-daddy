@@ -14,9 +14,11 @@ export default class SignUpUserService {
 
     if (!Email) throw new Error('Email incorrect')
 
-    const userAlreadyExists = await prisma.users.findUnique({
-      where: { email: Email },
-    })
+    const userAlreadyExists = await prisma.users
+      .findUnique({
+        where: { email: Email },
+      })
+      .finally(() => prisma.$disconnect())
 
     if (userAlreadyExists) throw new Error('User already exists')
 

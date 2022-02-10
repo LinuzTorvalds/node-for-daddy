@@ -7,12 +7,14 @@ export default class DeleteTokenService {
   async execute({ Email }: userRequest) {
     const prisma = new PrismaClient()
 
-    const user = await prisma.users.update({
-      data: {
-        token: '',
-      },
-      where: { email: Email },
-    })
+    const user = await prisma.users
+      .update({
+        data: {
+          token: '',
+        },
+        where: { email: Email },
+      })
+      .finally(() => prisma.$disconnect())
 
     prisma.$disconnect()
 

@@ -5,7 +5,7 @@ import SignUpUserControl from './controllers/users/SignUp'
 import SignInUserControl from './controllers/users/SignIn'
 import UpdateUserControl from './controllers/users/Update'
 import CreateTokenUserControl from './controllers/users/CreateToken'
-import KeepConectUserControl from './controllers/users/KeepConect'
+import KeepConnectUserControl from './controllers/users/KeepConnect'
 import DeleteTokenUserControl from './controllers/users/DeleteToken'
 
 //materials
@@ -26,7 +26,7 @@ const signUpUserControl = new SignUpUserControl()
 const signInUserControl = new SignInUserControl()
 const updateUserControl = new UpdateUserControl()
 const createTokenUserControl = new CreateTokenUserControl()
-const keepConectUserControl = new KeepConectUserControl()
+const keepConnectUserControl = new KeepConnectUserControl()
 const deleteTokenUserControl = new DeleteTokenUserControl()
 
 //materials
@@ -54,7 +54,7 @@ router.post('/users/signup', signUpUserControl.handle)
 router.post('/users/signin', signInUserControl.handle)
 router.put('/users/update/:Code', updateUserControl.handle)
 router.post('/users/createtoken', createTokenUserControl.handle)
-router.post('/users/keepconect', keepConectUserControl.handle)
+router.post('/users/keepconnect', keepConnectUserControl.handle)
 router.post('/users/deletetoken', deleteTokenUserControl.handle)
 
 //materials

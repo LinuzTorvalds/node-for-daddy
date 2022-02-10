@@ -15,14 +15,16 @@ export default class UpdateUserService {
 
     const passwordHash = await hash(Password, 8)
 
-    const user = await prisma.users.update({
-      data: {
-        name: Name,
-        email: Email,
-        password: passwordHash,
-      },
-      where: { code: Code },
-    })
+    const user = await prisma.users
+      .update({
+        data: {
+          name: Name,
+          email: Email,
+          password: passwordHash,
+        },
+        where: { code: Code },
+      })
+      .finally(() => prisma.$disconnect())
 
     const userFind = {
       code: user.code,

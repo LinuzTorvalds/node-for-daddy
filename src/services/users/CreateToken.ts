@@ -15,15 +15,8 @@ export default class CreateTokenService {
       where: { email: Email },
     })
 
-    const userFind = {
-      code: user.code,
-      name: user.name,
-      email: user.email,
-      token: user.token,
-    }
-
     prisma.$disconnect()
 
-    return userFind
+    return user.token
   }
 }

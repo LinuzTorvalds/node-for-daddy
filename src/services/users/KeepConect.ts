@@ -10,7 +10,6 @@ export default class KeepConectService {
     const user = await prisma.users.findFirst({ where: { token: Token } })
 
     const userFind = {
-      code: user.code,
       name: user.name,
       email: user.email,
       token: user.token,

@@ -4,6 +4,9 @@ import { Request, Response, Router } from 'express'
 import SignUpUserControl from './controllers/users/SignUp'
 import SignInUserControl from './controllers/users/SignIn'
 import UpdateUserControl from './controllers/users/Update'
+import CreateTokenUserControl from './controllers/users/CreateToken'
+import KeepConectUserControl from './controllers/users/KeepConect'
+import DeleteTokenUserControl from './controllers/users/DeleteToken'
 
 //materials
 import CreateMaterialControl from './controllers/material/Create'
@@ -22,6 +25,9 @@ import ReportTimeControl from './controllers/report/ReportTime'
 const signUpUserControl = new SignUpUserControl()
 const signInUserControl = new SignInUserControl()
 const updateUserControl = new UpdateUserControl()
+const createTokenUserControl = new CreateTokenUserControl()
+const keepConectUserControl = new KeepConectUserControl()
+const deleteTokenUserControl = new DeleteTokenUserControl()
 
 //materials
 const createMaterialControl = new CreateMaterialControl()
@@ -47,6 +53,9 @@ router.get('/', (request: Request, response: Response) => {
 router.post('/users/signup', signUpUserControl.handle)
 router.post('/users/signin', signInUserControl.handle)
 router.put('/users/update/:Code', updateUserControl.handle)
+router.post('/users/createtoken', createTokenUserControl.handle)
+router.post('/users/keepconect', keepConectUserControl.handle)
+router.post('/users/deletetoken', deleteTokenUserControl.handle)
 
 //materials
 router.post('/materials/create', createMaterialControl.handle)

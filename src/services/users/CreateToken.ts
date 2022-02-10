@@ -16,7 +16,7 @@ export default class CreateTokenService {
     })
 
     const UserToken = {
-      Token: user.token,
+      token: user.token,
     }
 
     prisma.$disconnect()

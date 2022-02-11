@@ -7,9 +7,12 @@ export default class ReportMaterialControl {
 
     const reportMaterialService = new ReportMaterialService()
 
-    const report = await reportMaterialService
-      .execute({ Description, Lote, StartDay, EndDay })
-      .finally()
+    const report = await reportMaterialService.execute({
+      Description,
+      Lote,
+      StartDay,
+      EndDay,
+    })
 
     return response.send(report)
   }

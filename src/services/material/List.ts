@@ -7,7 +7,9 @@ export default class ListMaterialService {
 
     let materials: material[]
 
-    materials = await prisma.material.findMany()
+    materials = await prisma.material
+      .findMany()
+      .finally(() => prisma.$disconnect())
 
     let listMaterials = []
 
@@ -18,8 +20,6 @@ export default class ListMaterialService {
 
       listMaterials.push({ ...material, diffDays })
     }
-
-    prisma.$disconnect()
 
     return listMaterials
   }

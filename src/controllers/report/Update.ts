@@ -8,9 +8,7 @@ export default class UpdateReportControl {
 
     const updateReportService = new UpdateReportService()
 
-    await updateReportService
-      .execute(Code, { Lote, Description, Amount, Day })
-      .finally()
+    await updateReportService.execute(Code, { Lote, Description, Amount, Day })
 
     return response.status(201).send('successfully updated :D')
   }

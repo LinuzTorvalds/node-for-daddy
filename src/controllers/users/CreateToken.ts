@@ -7,7 +7,7 @@ export default class CreateTokenUserControl {
 
     const createTokenService = new CreateTokenService()
 
-    const user = await createTokenService.execute({ Email }).finally()
+    const user = await createTokenService.execute({ Email })
 
     return response.send(user)
   }

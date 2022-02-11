@@ -16,18 +16,18 @@ export default class UpdateMaterialService {
 
     if (!Lote) throw new Error('Lote incorrect')
 
-    const material = await prisma.material.update({
-      data: {
-        description: Description,
-        amount: Amount,
-        shelf_life: new Date(Shelf_life),
-      },
-      where: {
-        lote: Lote,
-      },
-    })
-
-    prisma.$disconnect()
+    const material = await prisma.material
+      .update({
+        data: {
+          description: Description,
+          amount: Amount,
+          shelf_life: new Date(Shelf_life),
+        },
+        where: {
+          lote: Lote,
+        },
+      })
+      .finally(() => prisma.$disconnect())
 
     const materialFind = {
       lote: material.lote,

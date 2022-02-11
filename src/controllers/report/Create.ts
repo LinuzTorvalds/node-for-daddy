@@ -7,9 +7,12 @@ export default class CreateReportControl {
 
     const createReportService = new CreateReportService()
 
-    const report = await createReportService
-      .execute({ Lote, Description, Amount, Day })
-      .finally()
+    const report = await createReportService.execute({
+      Lote,
+      Description,
+      Amount,
+      Day,
+    })
 
     return response.send(report)
   }

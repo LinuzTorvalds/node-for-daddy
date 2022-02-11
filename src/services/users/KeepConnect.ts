@@ -17,8 +17,6 @@ export default class KeepConnectService {
       token: user.token,
     }
 
-    prisma.$disconnect()
-
     return userFind
   }
 }

@@ -20,16 +20,16 @@ export default class CreateMaterialService {
 
     if (materialAlreadyExists) throw new Error('Material already exists')
 
-    const material = await prisma.material.create({
-      data: {
-        lote: Lote,
-        description: Description,
-        amount: Amount,
-        shelf_life: new Date(Shelf_life),
-      },
-    })
-
-    prisma.$disconnect()
+    const material = await prisma.material
+      .create({
+        data: {
+          lote: Lote,
+          description: Description,
+          amount: Amount,
+          shelf_life: new Date(Shelf_life),
+        },
+      })
+      .finally(() => prisma.$disconnect())
 
     const materialFind = {
       lote: material.lote,

@@ -24,22 +24,21 @@ export default class SignUpUserService {
 
     const passwordHash = await hash(Password, 8)
 
-    const user = await prisma.users.create({
-      data: {
-        code: uuid(),
-        name: Name,
-        email: Email,
-        password: passwordHash,
-      },
-    })
+    const user = await prisma.users
+      .create({
+        data: {
+          code: uuid(),
+          name: Name,
+          email: Email,
+          password: passwordHash,
+        },
+      })
+      .finally(() => prisma.$disconnect())
 
     const userFind = {
-      code: user.code,
       name: user.name,
       email: Email,
     }
-
-    prisma.$disconnect()
 
     return userFind
   }

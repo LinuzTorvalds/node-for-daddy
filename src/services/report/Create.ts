@@ -12,35 +12,41 @@ export default class CreateReportService {
   async execute({ Lote, Description, Amount, Day }: reportRequest) {
     const prisma = new PrismaClient()
 
-    const data = await prisma.reports.findFirst({
-      where: {
-        day: new Date(Day),
-        AND: { description: Description },
-      },
-    })
+    const data = await prisma.reports
+      .findFirst({
+        where: {
+          day: new Date(Day),
+          AND: { description: Description },
+        },
+      })
+      .finally(() => prisma.$disconnect())
 
     let report: reports
 
     if (data != null) {
-      report = await prisma.reports.update({
-        data: {
-          lote: Lote,
-          description: Description,
-          amount: data.amount + Amount,
-          day: new Date(Day),
-        },
-        where: { code: data.code },
-      })
+      report = await prisma.reports
+        .update({
+          data: {
+            lote: Lote,
+            description: Description,
+            amount: data.amount + Amount,
+            day: new Date(Day),
+          },
+          where: { code: data.code },
+        })
+        .finally(() => prisma.$disconnect())
     } else {
-      report = await prisma.reports.create({
-        data: {
-          code: uuid(),
-          lote: Lote,
-          description: Description,
-          amount: Amount,
-          day: new Date(Day),
-        },
-      })
+      report = await prisma.reports
+        .create({
+          data: {
+            code: uuid(),
+            lote: Lote,
+            description: Description,
+            amount: Amount,
+            day: new Date(Day),
+          },
+        })
+        .finally(() => prisma.$disconnect())
     }
 
     return report

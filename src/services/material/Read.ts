@@ -5,11 +5,11 @@ export default class ReadMaterialService {
   async execute(Lote: string) {
     const prisma = new PrismaClient()
 
-    const material = await prisma.material.findUnique({
-      where: { lote: Lote },
-    })
-
-    prisma.$disconnect()
+    const material = await prisma.material
+      .findUnique({
+        where: { lote: Lote },
+      })
+      .finally(() => prisma.$disconnect())
 
     const materialFind = {
       lote: material.lote,

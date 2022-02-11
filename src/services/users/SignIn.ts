@@ -21,12 +21,9 @@ export default class SignInUserService {
     if (!passwordMatch) throw new Error('Login/Password incorrect')
 
     const userFind = {
-      code: user.code,
       name: user.name,
       email: user.email,
     }
-
-    prisma.$disconnect()
 
     return userFind
   }

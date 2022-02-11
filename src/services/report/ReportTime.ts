@@ -12,9 +12,7 @@ export default class ReportTimeService {
     const material =
       await prisma.$queryRaw`select * from reports where day between ${new Date(
         StartDay
-      )} and ${new Date(EndDay)}`
-
-    prisma.$disconnect()
+      )} and ${new Date(EndDay)}`.finally(() => prisma.$disconnect())
 
     return material
   }

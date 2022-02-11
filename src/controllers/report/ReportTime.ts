@@ -7,9 +7,7 @@ export default class ReportTimeControl {
 
     const reportTimeService = new ReportTimeService()
 
-    const report = await reportTimeService
-      .execute({ StartDay, EndDay })
-      .finally()
+    const report = await reportTimeService.execute({ StartDay, EndDay })
 
     return response.send(report)
   }

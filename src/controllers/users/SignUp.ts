@@ -7,13 +7,11 @@ export default class SignUpUserControl {
 
     const signUpUserService = new SignUpUserService()
 
-    const user = await signUpUserService
-      .execute({
-        Name,
-        Email,
-        Password,
-      })
-      .finally()
+    const user = await signUpUserService.execute({
+      Name,
+      Email,
+      Password,
+    })
 
     return response.json(user)
   }

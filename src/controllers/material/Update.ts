@@ -8,13 +8,11 @@ export default class UpdateMaterialControl {
 
     const updateMaterialService = new UpdateMaterialService()
 
-    const material = await updateMaterialService
-      .execute(Lote, {
-        Description,
-        Amount,
-        Shelf_life,
-      })
-      .finally()
+    const material = await updateMaterialService.execute(Lote, {
+      Description,
+      Amount,
+      Shelf_life,
+    })
 
     return response.send(material)
   }

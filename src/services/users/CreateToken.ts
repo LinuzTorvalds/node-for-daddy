@@ -21,8 +21,6 @@ export default class CreateTokenService {
       token: user.token,
     }
 
-    prisma.$disconnect()
-
     return UserToken
   }
 }

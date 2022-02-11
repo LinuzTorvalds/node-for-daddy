@@ -7,7 +7,7 @@ export default class ReadMaterialControl {
 
     const readMaterialService = new ReadMaterialService()
 
-    const material = await readMaterialService.execute(Lote).finally()
+    const material = await readMaterialService.execute(Lote)
 
     return response.send(material)
   }

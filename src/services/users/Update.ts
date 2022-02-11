@@ -27,12 +27,9 @@ export default class UpdateUserService {
       .finally(() => prisma.$disconnect())
 
     const userFind = {
-      code: user.code,
       name: user.name,
       email: Email,
     }
-
-    prisma.$disconnect()
 
     return userFind
   }

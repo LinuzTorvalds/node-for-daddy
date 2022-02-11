@@ -7,14 +7,12 @@ export default class CreateMaterialControl {
 
     const createMaterialService = new CreateMaterialService()
 
-    const material = await createMaterialService
-      .execute({
-        Lote,
-        Description,
-        Amount,
-        Shelf_life,
-      })
-      .finally()
+    const material = await createMaterialService.execute({
+      Lote,
+      Description,
+      Amount,
+      Shelf_life,
+    })
 
     return response.send(material)
   }

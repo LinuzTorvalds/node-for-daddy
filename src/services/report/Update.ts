@@ -15,15 +15,17 @@ export default class UpdateReportService {
   ) {
     const prisma = new PrismaClient()
 
-    const report = await prisma.reports.update({
-      data: {
-        lote: Lote,
-        description: Description,
-        amount: Amount,
-        day: new Date(Day),
-      },
-      where: { code: Code },
-    })
+    const report = await prisma.reports
+      .update({
+        data: {
+          lote: Lote,
+          description: Description,
+          amount: Amount,
+          day: new Date(Day),
+        },
+        where: { code: Code },
+      })
+      .finally(() => prisma.$disconnect())
 
     return report
   }

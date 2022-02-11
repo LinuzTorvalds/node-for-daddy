@@ -16,8 +16,6 @@ export default class DeleteTokenService {
       })
       .finally(() => prisma.$disconnect())
 
-    prisma.$disconnect()
-
     return user.token
   }
 }

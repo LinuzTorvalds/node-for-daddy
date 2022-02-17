@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -19,7 +16,9 @@ model users {
 }
 
 model material {
-  lote     String @id
+  id     String @id
+  code     String
+  lote     String
   description String
   amount   Int 
   shelf_life DateTime @db.Date

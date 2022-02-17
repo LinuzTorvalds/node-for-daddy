@@ -8,7 +8,7 @@ export default class ListMaterialService {
     let materials: material[]
 
     materials = await prisma.material
-      .findMany()
+      .findMany({ orderBy: { description: 'asc' } })
       .finally(() => prisma.$disconnect())
 
     let listMaterials = []

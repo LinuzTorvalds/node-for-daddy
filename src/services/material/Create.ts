@@ -23,7 +23,7 @@ export default class CreateMaterialService {
     if (!Lote) throw new Error('Lote incorrect')
 
     const data = await prisma.material.findFirst({
-      where: { lote: Lote, AND: { shelf_life: Shelf_life } },
+      where: { lote: Lote, AND: { shelf_life: new Date(Shelf_life) } },
     })
 
     let material: material

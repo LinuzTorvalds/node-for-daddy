@@ -4,7 +4,7 @@ export default class DeleteMaterialService {
   async execute(Id: string) {
     const prisma = new PrismaClient()
 
-    if (!Id) throw new Error('Id incorrect')
+    // if (!Id) throw new Error('Id incorrect')
 
     const material = await prisma.material
       .delete({

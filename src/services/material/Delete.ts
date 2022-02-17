@@ -1,14 +1,14 @@
 import { PrismaClient } from '@prisma/client'
 
 export default class DeleteMaterialService {
-  async execute(Lote: string) {
+  async execute(Id: string) {
     const prisma = new PrismaClient()
 
-    if (!Lote) throw new Error('Lote incorrect')
+    if (!Id) throw new Error('Id incorrect')
 
     const material = await prisma.material
       .delete({
-        where: { lote: Lote },
+        where: { id: Id },
       })
       .finally(() => prisma.$disconnect())
 

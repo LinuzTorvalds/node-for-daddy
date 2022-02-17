@@ -2,6 +2,8 @@ import { PrismaClient } from '@prisma/client'
 import moment from 'moment'
 
 type materialRequest = {
+  Code: string
+  Lote: string
   Description: string
   Amount: number
   Shelf_life: Date
@@ -9,22 +11,24 @@ type materialRequest = {
 
 export default class UpdateMaterialService {
   async execute(
-    Lote: string,
-    { Description, Amount, Shelf_life }: materialRequest
+    Id: string,
+    { Code, Lote, Description, Amount, Shelf_life }: materialRequest
   ) {
     const prisma = new PrismaClient()
 
-    if (!Lote) throw new Error('Lote incorrect')
+    if (!Id) throw new Error('Lote incorrect')
 
     const material = await prisma.material
       .update({
         data: {
+          code: Code,
+          lote: Lote,
           description: Description,
           amount: Amount,
           shelf_life: new Date(Shelf_life),
         },
         where: {
-          lote: Lote,
+          id: Id,
         },
       })
       .finally(() => prisma.$disconnect())

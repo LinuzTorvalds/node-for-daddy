@@ -1,7 +1,10 @@
-import { PrismaClient } from '@prisma/client'
+import { material, PrismaClient } from '@prisma/client'
 import moment from 'moment'
+import { v4 as uuid } from 'uuid'
 
 type materialRequest = {
+  Id: string
+  Code: string
   Lote: string
   Description: string
   Amount: number
@@ -9,27 +12,47 @@ type materialRequest = {
 }
 
 export default class CreateMaterialService {
-  async execute({ Lote, Description, Amount, Shelf_life }: materialRequest) {
+  async execute({
+    Id,
+    Code,
+    Lote,
+    Description,
+    Amount,
+    Shelf_life,
+  }: materialRequest) {
     const prisma = new PrismaClient()
 
     if (!Lote) throw new Error('Lote incorrect')
 
-    const materialAlreadyExists = await prisma.material.findUnique({
-      where: { lote: Lote },
+    const data = await prisma.material.findFirst({
+      where: { lote: Lote, AND: { shelf_life: Shelf_life } },
     })
 
-    if (materialAlreadyExists) throw new Error('Material already exists')
+    let material: material
 
-    const material = await prisma.material
-      .create({
-        data: {
-          lote: Lote,
-          description: Description,
-          amount: Amount,
-          shelf_life: new Date(Shelf_life),
-        },
-      })
-      .finally(() => prisma.$disconnect())
+    if (data != null) {
+      material = await prisma.material
+        .update({
+          data: {
+            amount: data.amount + Amount,
+          },
+          where: { id: Id },
+        })
+        .finally(() => prisma.$disconnect())
+    } else {
+      material = await prisma.material
+        .create({
+          data: {
+            id: uuid(),
+            code: Code,
+            lote: Lote,
+            description: Description,
+            amount: Amount,
+            shelf_life: new Date(Shelf_life),
+          },
+        })
+        .finally(() => prisma.$disconnect())
+    }
 
     const materialFind = {
       lote: material.lote,

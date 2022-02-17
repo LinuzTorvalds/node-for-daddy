@@ -57,9 +57,7 @@ export default class CreateMaterialService {
       lote: material.lote,
       description: material.description,
       amount: material.amount,
-      shelf_life: moment(material.shelf_life)
-        .add(1, 'days')
-        .format('YYYY-MM-DD'),
+      shelf_life: moment(material.shelf_life).format('YYYY-MM-DD'),
     }
 
     return materialFind

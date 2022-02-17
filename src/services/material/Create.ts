@@ -3,7 +3,6 @@ import moment from 'moment'
 import { v4 as uuid } from 'uuid'
 
 type materialRequest = {
-  Id: string
   Code: string
   Lote: string
   Description: string
@@ -13,7 +12,6 @@ type materialRequest = {
 
 export default class CreateMaterialService {
   async execute({
-    Id,
     Code,
     Lote,
     Description,
@@ -36,7 +34,7 @@ export default class CreateMaterialService {
           data: {
             amount: data.amount + Amount,
           },
-          where: { id: Id },
+          where: { id: data.id },
         })
         .finally(() => prisma.$disconnect())
     } else {

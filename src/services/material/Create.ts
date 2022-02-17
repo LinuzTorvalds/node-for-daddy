@@ -53,6 +53,7 @@ export default class CreateMaterialService {
     }
 
     const materialFind = {
+      code: material.code,
       lote: material.lote,
       description: material.description,
       amount: material.amount,

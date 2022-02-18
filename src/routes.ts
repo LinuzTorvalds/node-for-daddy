@@ -59,8 +59,8 @@ router.post('/users/deletetoken', deleteTokenUserControl.handle)
 
 //materials
 router.post('/materials/create', createMaterialControl.handle)
-router.delete('/materials/delete/:Lote', deleteMaterialControl.handle)
-router.put('/materials/update/:Lote', updateMaterialControl.handle)
+router.delete('/materials/delete/:Id', deleteMaterialControl.handle)
+router.put('/materials/update/:Id', updateMaterialControl.handle)
 router.get('/materials/list', listMaterialControl.handle)
 router.get('/materials/read/:Lote', readMaterialControl.handle)
 

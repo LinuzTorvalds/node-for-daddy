@@ -5,20 +5,28 @@ describe('nada º~º', () => {
   it('test 0_0', async () => {
     const prisma = new PrismaClient()
 
-    let materials: material[]
+    const EndDay = new Date()
 
-    materials = await prisma.material.findMany()
+    const Days = 30
 
-    let listMaterials = []
+    const StartDay = moment(EndDay).subtract(Days, 'days').toDate()
 
-    for (let material of materials) {
-      const shelf_life = moment(material.shelf_life).add(1, 'days')
+    let material: any =
+      await prisma.$queryRaw`select * from reports where day between ${new Date(
+        StartDay
+      )} and ${new Date(EndDay)}`.finally(() => prisma.$disconnect())
 
-      const diffDays = moment(shelf_life).diff(new Date(), 'days')
-
-      listMaterials.push({ ...material, diffDays })
+    material = {
+      ...material,
+      title:
+        'Decorridos: ' +
+        Days +
+        ' dias a partir da data: ' +
+        moment(StartDay).format('DD-MM-YYYY') +
+        ' até ' +
+        moment(EndDay).format('DD-MM-YYYY'),
     }
 
-    console.log(listMaterials)
+    console.log(material)
   })
 })

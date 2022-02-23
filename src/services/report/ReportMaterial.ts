@@ -28,13 +28,14 @@ export default class ReportMaterialService {
 
     material = {
       ...material,
-      title:
+      title: (
         'Decorridos: ' +
         Days +
         ' dias a partir da data: ' +
         moment(StartDay).format('DD-MM-YYYY') +
         ' até ' +
-        moment(EndDay).format('DD-MM-YYYY'),
+        moment(EndDay).format('DD-MM-YYYY')
+      ).toString(),
     }
 
     return material

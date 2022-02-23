@@ -17,6 +17,7 @@ export default class KeepConnectService {
       token: user.token,
     }
 
-    return userFind
+    if (userFind) return userFind
+    else return null
   }
 }

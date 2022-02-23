@@ -3,11 +3,11 @@ import ReportTimeService from '../../services/report/ReportTime'
 
 export default class ReportTimeControl {
   async handle(request: Request, response: Response) {
-    const { StartDay, EndDay } = request.body
+    const { Days, EndDay } = request.body
 
     const reportTimeService = new ReportTimeService()
 
-    const report = await reportTimeService.execute({ StartDay, EndDay })
+    const report = await reportTimeService.execute({ Days, EndDay })
 
     return response.send(report)
   }

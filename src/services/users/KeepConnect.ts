@@ -11,13 +11,20 @@ export default class KeepConnectService {
       .findFirst({ where: { token: Token } })
       .finally(() => prisma.$disconnect())
 
-    const userFind = {
-      name: user.name,
-      email: user.email,
-      token: user.token,
+    if (user.email === null || user.email === undefined) {
+      const userFind = {
+        name: 'error',
+        email: 'error',
+        token: 'error',
+      }
+      return userFind
+    } else {
+      const userFind = {
+        name: user.name,
+        email: user.email,
+        token: user.token,
+      }
+      return userFind
     }
-
-    if (userFind) return userFind
-    else return null
   }
 }

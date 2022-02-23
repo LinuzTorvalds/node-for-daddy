@@ -67,7 +67,7 @@ router.get('/materials/read/:Lote', readMaterialControl.handle)
 //reports
 router.post('/reports/create', createReportControl.handle)
 router.put('/reports/update/:Code', updateReportControl.handle)
-router.get('/reports/material', reportMaterialControl.handle)
-router.get('/reports/time', reportTimeControl.handle)
+router.post('/reports/material', reportMaterialControl.handle)
+router.post('/reports/time', reportTimeControl.handle)
 
 export default router

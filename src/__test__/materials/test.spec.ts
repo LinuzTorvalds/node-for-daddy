@@ -1,4 +1,4 @@
-import { material, PrismaClient } from '@prisma/client'
+import { PrismaClient, reports } from '@prisma/client'
 import moment from 'moment'
 
 describe('nada º~º', () => {
@@ -11,11 +11,24 @@ describe('nada º~º', () => {
 
     const StartDay = moment(EndDay).subtract(Days, 'days').toDate()
 
-    let material =
-      await prisma.$queryRaw`select * from reports where day between ${new Date(
-        StartDay
-      )} and ${new Date(EndDay)}`.finally(() => prisma.$disconnect())
+    let data: reports = await prisma.$queryRaw<reports>`
+      select * from reports where description = ${'Ab'} and lote = ${'cd'} and (day between ${new Date(
+      StartDay
+    )} and ${new Date(EndDay)})`.finally(() => prisma.$disconnect())
 
-    console.log(material)
+    let report = { title: '', data: {} }
+
+    report.title = (
+      'Decorridos: ' +
+      Days +
+      ' dias a partir da data: ' +
+      moment(StartDay).format('DD-MM-YYYY') +
+      ' até ' +
+      moment(EndDay).format('DD-MM-YYYY')
+    ).toString()
+
+    report.data = data
+
+    console.log(report.data[0])
   })
 })

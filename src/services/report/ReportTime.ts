@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, reports } from '@prisma/client'
 import moment from 'moment'
 
 type reportRequest = {
@@ -18,11 +18,25 @@ export default class ReportTimeService {
       StartDay = moment(EndDay).subtract(Days, 'days').toDate()
     }
 
-    let material =
-      await prisma.$queryRaw`select * from reports where day between ${new Date(
-        StartDay
-      )} and ${new Date(EndDay)}`.finally(() => prisma.$disconnect())
+    let data: reports[] = await prisma.$queryRaw<
+      reports[]
+    >`select * from reports where day between ${new Date(
+      StartDay
+    )} and ${new Date(EndDay)}`.finally(() => prisma.$disconnect())
 
-    return material
+    let report = { title: '', data: [] }
+
+    report.title = (
+      'Decorridos: ' +
+      Days +
+      ' dias a partir da data: ' +
+      moment(StartDay).format('DD-MM-YYYY') +
+      ' até ' +
+      moment(EndDay).format('DD-MM-YYYY')
+    ).toString()
+
+    report.data = data
+
+    return report
   }
 }

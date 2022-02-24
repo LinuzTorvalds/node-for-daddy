@@ -11,21 +11,10 @@ describe('nada º~º', () => {
 
     const StartDay = moment(EndDay).subtract(Days, 'days').toDate()
 
-    let material: any =
+    let material =
       await prisma.$queryRaw`select * from reports where day between ${new Date(
         StartDay
       )} and ${new Date(EndDay)}`.finally(() => prisma.$disconnect())
-
-    material = {
-      ...material,
-      title:
-        'Decorridos: ' +
-        Days +
-        ' dias a partir da data: ' +
-        moment(StartDay).format('DD-MM-YYYY') +
-        ' até ' +
-        moment(EndDay).format('DD-MM-YYYY'),
-    }
 
     console.log(material)
   })

@@ -21,22 +21,10 @@ export default class ReportMaterialService {
       StartDay = moment(EndDay).subtract(Days, 'days').toDate()
     }
 
-    let material: any = await prisma.$queryRaw`
+    let material = await prisma.$queryRaw`
       select * from reports where description = ${Description} and lote = ${Lote} and (day between ${new Date(
       StartDay
     )} and ${new Date(EndDay)})`.finally(() => prisma.$disconnect())
-
-    material = {
-      ...material,
-      title: (
-        'Decorridos: ' +
-        Days +
-        ' dias a partir da data: ' +
-        moment(StartDay).format('DD-MM-YYYY') +
-        ' até ' +
-        moment(EndDay).format('DD-MM-YYYY')
-      ).toString(),
-    }
 
     return material
   }

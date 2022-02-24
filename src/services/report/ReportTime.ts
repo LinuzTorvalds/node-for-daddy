@@ -22,7 +22,9 @@ export default class ReportTimeService {
       reports[]
     >`select * from reports where day between ${new Date(
       StartDay
-    )} and ${new Date(EndDay)}`.finally(() => prisma.$disconnect())
+    )} and ${new Date(EndDay)} order by code`.finally(() =>
+      prisma.$disconnect()
+    )
 
     let report = { title: '', data: [] }
 

@@ -24,7 +24,9 @@ export default class ReportMaterialService {
     let data: reports = await prisma.$queryRaw<reports>`
       select * from reports where description = ${Description} and lote = ${Lote} and (day between ${new Date(
       StartDay
-    )} and ${new Date(EndDay)})`.finally(() => prisma.$disconnect())
+    )} and ${new Date(EndDay)}) order by code`.finally(() =>
+      prisma.$disconnect()
+    )
 
     let report = { title: '', data: {} }
 

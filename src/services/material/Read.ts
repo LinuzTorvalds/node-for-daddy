@@ -11,7 +11,7 @@ export default class ReadMaterialService {
       })
       .finally(() => prisma.$disconnect())
 
-    if (material) throw new Error('Not found material')
+    if (!material) throw new Error('Not found material')
 
     const materialFind = {
       lote: material.lote,

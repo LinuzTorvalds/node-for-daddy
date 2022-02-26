@@ -62,7 +62,7 @@ router.post('/materials/create', createMaterialControl.handle)
 router.delete('/materials/delete/:Id', deleteMaterialControl.handle)
 router.put('/materials/update/:Id', updateMaterialControl.handle)
 router.get('/materials/list', listMaterialControl.handle)
-router.get('/materials/read/:Lote', readMaterialControl.handle)
+router.get('/materials/read/:Id', readMaterialControl.handle)
 
 //reports
 router.post('/reports/create', createReportControl.handle)

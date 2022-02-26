@@ -11,7 +11,7 @@ export default class KeepConnectService {
       .findFirst({ where: { token: Token } })
       .finally(() => prisma.$disconnect())
 
-    if (user == null) return 'Error O_O'
+    if (user) return 'Error O_O'
     else {
       const userFind = {
         name: user.name,
